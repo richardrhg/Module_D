@@ -1,0 +1,248 @@
+#headerTitle {
+    border: 1px solid gray;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    padding: 10px;
+    margin: 10px;
+    font-weight: bold;
+    user-select: none;
+    cursor: pointer;
+}
+
+/* RGB */
+@keyframes god {
+    0% {
+        box-shadow: 0 0 20px rgba(164, 254, 19, 1);
+    }
+    20% {
+        box-shadow: 0 0 20px rgba(19, 172, 254, 1);
+    }
+    40% {
+        box-shadow: 0 0 20px rgba(23, 34, 239, 1);
+    }
+    60% {
+        box-shadow: 0 0 20px rgba(254, 19, 250, 1);
+    }
+    80% {
+        box-shadow: 0 0 20px rgba(254, 250, 19, 1);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(164, 254, 19, 1);
+    }
+}
+
+.god {
+    animation: god 3s linear infinite;;
+}
+
+@keyframes fade-in {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+
+/* Double-sided timeline */
+/* The actual timeline (the vertical ruler) */
+.main-timeline {
+    position: relative;
+}
+
+/* The actual timeline (the vertical ruler) */
+.main-timeline::after {
+    content: "";
+    position: absolute;
+    width: 6px;
+    background-color: #939597;
+    top: 0;
+    bottom: 0;
+    left: 50%;
+    margin-left: -3px;
+    /*animation: fade-in 2s linear forwards;*/
+}
+
+
+
+/* Container around content */
+.timeline {
+    position: relative;
+    background-color: inherit;
+    /*animation: fade-in 1s linear forwards;*/
+    /*opacity: 0;*/
+    width: 50%;
+}
+.timeline:hover > .card{
+    cursor: pointer;
+    animation: god 3s linear infinite;
+}
+/*.timeline:nth-child(1) {*/
+/*    animation-delay: .2s;*/
+/*}*/
+
+/*.timeline:nth-child(2) {*/
+/*    animation-delay: .4s;*/
+/*}*/
+
+/*.timeline:nth-child(3) {*/
+/*    animation-delay: .6s;*/
+/*}*/
+
+/*.timeline:nth-child(4) {*/
+/*    animation-delay: .8s;*/
+/*}*/
+
+/*.timeline:nth-child(5) {*/
+/*    animation-delay: 1s;*/
+/*}*/
+
+/* The circles on the timeline */
+.timeline::after {
+    content: "";
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    right: -13px;
+    background-color: #939597;
+    border: 5px solid #f5df4d;
+    top: 15px;
+    border-radius: 50%;
+    z-index: 1;
+}
+
+/* Place the container to the left */
+.left {
+    padding: 0px 40px 20px 0px;
+    left: 0;
+}
+
+/* Place the container to the right */
+.right {
+    padding: 0px 0px 20px 40px;
+    left: 50%;
+}
+
+/* Add arrows to the left container (pointing right) */
+.left::before {
+    content: " ";
+    position: absolute;
+    top: 18px;
+    z-index: 1;
+    right: 30px;
+    border: medium solid white;
+    border-width: 10px 0 10px 10px;
+    border-color: transparent transparent transparent white;
+}
+
+/* Add arrows to the right container (pointing left) */
+.right::before {
+    content: " ";
+    position: absolute;
+    top: 18px;
+    z-index: 1;
+    left: 30px;
+    border: medium solid white;
+    border-width: 10px 10px 10px 0;
+    border-color: transparent white transparent transparent;
+}
+
+/* Fix the circle for containers on the right side */
+.right::after {
+    left: -12px;
+}
+
+/* Media queries - Responsive timeline on screens less than 600px wide */
+@media screen and (max-width: 600px) {
+    /* Place the timelime to the left */
+    .main-timeline::after {
+        left: 31px;
+    }
+
+    /* Full-width containers */
+    .timeline {
+        width: 100%;
+        padding-left: 70px;
+        padding-right: 25px;
+    }
+
+    /* Make sure that all arrows are pointing leftwards */
+    .timeline::before {
+        left: 60px;
+        border: medium solid white;
+        border-width: 10px 10px 10px 0;
+        border-color: transparent white transparent transparent;
+    }
+
+    /* Make sure all circles are at the same spot */
+    .left::after,
+    .right::after {
+        left: 18px;
+    }
+
+    .left::before {
+        right: auto;
+    }
+
+    /* Make all right containers behave like the left ones */
+    .right {
+        left: 0%;
+    }
+}
+
+
+/* tab from codepen */
+.tabs {
+    position: relative;
+
+    clear: both;
+    margin: 25px 0;
+}
+
+.tab {
+    float: left;
+}
+
+.tab label {
+    /*background: #eee;*/
+    padding: 10px;
+    /*border: 1px solid #ccc;*/
+    margin-left: -1px;
+    position: relative;
+    color: grey;
+    left: 1px;
+    transition: .2s;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.tab [type=radio] {
+    display: none;
+}
+
+.content {
+    position: absolute;
+    top: 50px;
+    left: 0;
+    /*background: white;*/
+    right: 0;
+    bottom: 0;
+    padding: 20px;
+    /*border: 1px solid #ccc;*/
+    display: none;
+}
+
+[type=radio]:checked ~ label {
+    /*background: white;*/
+    /*border-bottom: 1px solid white;*/
+    z-index: 2;
+    color: white;
+    animation: god 3s linear infinite;
+}
+
+[type=radio]:checked ~ label ~ .content {
+    z-index: 1;
+    display: block;
+}
+
